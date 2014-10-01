@@ -1,0 +1,14 @@
+<div class="object" id="object-{{ object.pk }}">
+    <a href="{{ object.url }}" target="_blank">
+        {{ object.url|truncatechars:50 }}
+    </a>
+    &mdash;
+    updated {{ object.update_count }} time{{ object.update_count|pluralize }}
+    <div>
+        {{ object.text|linebreaks }}
+    </div>
+    <div class="object-controls">
+        <a href="{% url 'feedback_update' feedback_pk=object.pk %}" class="fm-update btn btn-default" data-fm-head="Updating feedback" data-fm-callback="replace" data-fm-target="#object-{{ object.pk }}">Update</a>
+        <a href="{% url 'feedback_delete' feedback_pk=object.pk %}" class="fm-delete btn btn-default" data-fm-head="Delete this feedback?" data-fm-callback="remove" data-fm-target="#object-{{ object.pk }}">Delete</a>
+    </div>
+</div>

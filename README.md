@@ -1,9 +1,11 @@
 This is experimental!
 
+[demo](http://djangofm.herokuapp.com/)
+
 Django FM
 =========
 
-Requires jQuery and Bootstrap 3.
+Requires jQuery and Bootstrap 3
 
 Install:
 
@@ -26,5 +28,3 @@ Also in `settings.py` set crispy template pack to `bootstrap3`:
 ```python
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 ```
-
-To be continued...

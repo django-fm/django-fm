@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
+        <script type="text/javascript" src="/static/jquery/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $.fm({debug: true});
+            });
+        </script>
+        <style>
+            #content {
+                margin: 0 auto; max-width: 800px; padding: 0 20px;
+            }
+            .object-list {
+                margin-top: 30px;
+            }
+            .object {
+                margin-bottom: 30px;
+            }
+            .object-controls {
+                margin-top: 10px;
+            }
+        </style>
+
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+        <section id="content">
+            {% block content %}{% endblock %}
+        </section>
+        <footer id="footer">
+            {% block footer %}{% endblock %}
+        </footer>
+        {% block extra_body %}{% endblock %}
+        {% include "fm/modal.html" %}
+    </body>
+</html>

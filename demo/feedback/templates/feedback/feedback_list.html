@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Provide feedback on something in internet</h1>
+    <div>
+        <a href="{% url 'feedback_create' %}" class="fm-create btn btn-primary" data-fm-head="Creating feedback" data-fm-callback="reload">Create new</a>
+    </div>
+    <div class="object-list">
+        {% for object in object_list %}
+            {% include 'feedback/feedback_instance.html' %}
+        {% endfor %}
+    </div>
+{% endblock %}
