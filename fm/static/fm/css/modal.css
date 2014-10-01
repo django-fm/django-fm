@@ -1,0 +1,45 @@
+.fm-modal .modal-content {
+    margin: 0;
+    width: auto;
+    background-clip: border-box;
+    border: 0 none;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100%;
+    padding: 100px 0 20px 0;
+}
+.fm-modal .modal-head {
+    font-size: 2.4em;
+    text-align: center;
+}
+.fm-modal .modal-buttons {
+    text-align: left;
+    padding-left: 20px;
+}
+.fm-modal .close-modal {
+    background-color: transparent;
+    cursor: pointer;
+    height: 75px;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    width: 75px;
+}
+.fm-modal .close-modal:hover {
+    opacity: 0.3;
+}
+.fm-modal .close-modal .lr {
+    background-color: #222;
+    height: 75px;
+    margin-left: 35px;
+    transform: rotate(45deg);
+    width: 1px;
+    z-index: 1051;
+}
+.fm-modal .close-modal .lr .rl {
+    background-color: #222;
+    height: 75px;
+    transform: rotate(90deg);
+    width: 1px;
+    z-index: 1052;
+}

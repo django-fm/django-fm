@@ -1,0 +1,12 @@
+_Store
+._*
+*.pyc
+*.egg-info
+/docs/_build/
+/.coverage
+/.coverage.xml
+/htmlcov
+/.tox
+dist/
+.idea
+build/
