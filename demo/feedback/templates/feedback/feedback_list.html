@@ -2,6 +2,9 @@
 
 {% block content %}
     <h1>Provide feedback on something in internet</h1>
+    <blockquote>
+        This is a demonstration of <a href="https://github.com/FZambia/django-fm" target="_blank">django-fm</a> app. Django-fm allows to create AJAX forms for creating, editing, deleting objects in Django. This is a very personalized approach to quickly build admin-like interfaces.
+    </blockquote>
     <div>
         <a href="{% url 'feedback_create' %}" class="fm-create btn btn-primary" data-fm-head="Creating feedback" data-fm-callback="reload">Create new</a>
     </div>
