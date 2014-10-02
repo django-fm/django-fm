@@ -5,7 +5,7 @@ Django FM
 
 Requires jQuery and Bootstrap 3 on client side. Depends on Django-crispy-forms.
 
-This app allows to make AJAX modal forms for creating, editing, deleting objects in Django. This is a very personalized approach to quickly build admin-like interfaces. It reduces an amount of time and code when making tedious Django work. 
+This app allows to make responsive AJAX modal forms for creating, editing, deleting objects in Django. This is a very personalized approach to quickly build admin-like interfaces. It reduces an amount of time and code when making tedious Django work. 
 
 Install:
 
@@ -59,6 +59,10 @@ There are 3 class-based views in django-fm to inherit from when you want AJAX fo
 
 You create urls for them as always, in templates you just create links to create, update, delete resources with special class (`fm-create`, `fm-update`, `fm-delete`).
 
-Every link can have some attributes which define modal window behaviour and callback after successfull object creation, update or deletion.
+Every link can have some attributes which define modal window behaviour and callback after successfull object creation, update or deletion:
+
+* `data-fm-head` - header of modal
+* `data-fm-action` - what to do after successfull modal submission - at moment the following values allowed: `reload`, `redirect`, `replace`, `remove`, `prepend`, `append`
+* `data-fm-target` - value of action specific for each action type - for example this must be an URL when `data-fm-action` is `redirect`
 
 See demo project to see this concept in action
