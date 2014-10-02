@@ -1,11 +1,9 @@
-This is experimental!
-
-[demo](http://djangofm.herokuapp.com/)
+[Live example](http://djangofm.herokuapp.com/) - see the source code of demonstration in `demo` repository folder.
 
 Django FM
 =========
 
-Requires jQuery and Bootstrap 3
+Requires jQuery and Bootstrap 3 on client side. Depends on Django-crispy-forms.
 
 Install:
 
