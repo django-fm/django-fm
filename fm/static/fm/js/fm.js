@@ -15,7 +15,8 @@
                 modal_loader_selector: '.modal-loader',
                 modal_load_error: "Error occurred while loading",
                 delegate_target: 'body',
-                trigger_event_name: 'fm.success'
+                trigger_event_name: 'fm.success',
+                ready_event_name: 'fm.ready'
             };
 
             var global_options = jQuery.extend(defaults, custom_options);
@@ -95,7 +96,7 @@
                             submit_form(form, options);
                             return false;
                         });
-                        modal.trigger('modal_body_ready');
+                        modal.trigger(global_options.ready_event_name);
                     }
                 }).done(function(){
                     modal_head.html(options.modal_head);
