@@ -5,6 +5,8 @@ Django FM
 
 Requires jQuery and Bootstrap 3 on client side. Depends on Django-crispy-forms.
 
+This app allows to make AJAX modal forms for creating, editing, deleting objects in Django. This is a very personalized approach to quickly build admin-like interfaces. It reduces an amount of time and code when making tedious Django work. 
+
 Install:
 
 ```bash
