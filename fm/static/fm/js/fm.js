@@ -12,6 +12,7 @@
                 modal_head_selector: '.modal-head',
                 modal_body_selector: '.modal-body',
                 modal_buttons_selector: '.modal-buttons',
+                modal_loader_selector: '.modal-loader',
                 modal_load_error: "Error occurred while loading",
                 delegate_target: 'body',
                 trigger_event_name: 'fm.success'
@@ -59,6 +60,7 @@
 
             var delegate_target = $(global_options.delegate_target);
             var modal = $(global_options.modal_selector);
+            var modal_loader = $(global_options.modal_loader_selector);
             var modal_wrapper = $(global_options.modal_wrapper_selector);
             var modal_head = $(global_options.modal_head_selector);
             var modal_body = $(global_options.modal_body_selector);
@@ -75,7 +77,7 @@
                     debug("no URL found to load data from");
                     return;
                 }
-
+                modal_loader.show();
                 $.ajax({
                     url: options.url,
                     type: "GET",
@@ -97,6 +99,7 @@
                     }
                 }).done(function(){
                     modal_head.html(options.modal_head);
+                    modal_loader.hide();
                 });
             }
 
@@ -112,14 +115,11 @@
                 debug("options:");
                 debug(options);
                 modal.modal('show');
-                modal.unbind('shown.bs.modal').bind('shown.bs.modal', function () {
-                    debug("modal shown event fired");
-                    modal_buttons.find('[type="submit"]').unbind('click').bind("click", function () {
-                        var form = modal.find('form');
-                        submit_form(form, options);
-                    });
-                    load_content(options);
+                modal_buttons.find('[type="submit"]').unbind('click').bind("click", function () {
+                    var form = modal.find('form');
+                    submit_form(form, options);
                 });
+                load_content(options);
             }
 
             function show_delete_modal(element) {
@@ -127,21 +127,18 @@
                 var options = extract_modal_options(element, 'delete');
                 debug(options);
                 modal.modal('show');
-                modal.unbind('shown.bs.modal').bind('shown.bs.modal', function () {
-                    debug("modal shown event fired");
-                    modal_head.html(options.modal_head);
-                    modal_wrapper.show();
-                    modal_buttons.find('[type="submit"]').unbind('click').bind("click", function () {
-                        var url = options.url;
-                        $.ajax({
-                            url: url,
-                            type: 'DELETE',
-                            dataType: "json",
-                            success: function(data) {
-                                debug(data);
-                                process_response_data(data, options);
-                            }
-                        });
+                modal_head.html(options.modal_head);
+                modal_wrapper.show();
+                modal_buttons.find('[type="submit"]').unbind('click').bind("click", function () {
+                    var url = options.url;
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        dataType: "json",
+                        success: function(data) {
+                            debug(data);
+                            process_response_data(data, options);
+                        }
                     });
                 });
             }
@@ -186,7 +183,6 @@
             function process_response_data(data, options) {
                 if (data.status === 'ok') {
                     modal.modal("hide");
-                    clear_modal();
                     if (options.modal_callback === null || options.modal_callback === undefined) {
                         $.noop();
                     } else if (options.modal_callback === 'reload') {

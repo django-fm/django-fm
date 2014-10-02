@@ -1,5 +1,9 @@
 {% load i18n %}
-<div tabindex="-1" role="dialog" aria-hidden="true" id="fm-modal" class="fm-modal modal fade in">
+{% load static %}
+<div tabindex="-1" role="dialog" aria-hidden="true" id="fm-modal" class="fm-modal modal">
+    <div class="modal-loader" style="display: none;">
+        <img class="modal-loader-img" src="{% static "fm/img/loading-bars.svg" %}">
+    </div>
     <div class="modal-dialog modal-content">
         <div data-dismiss="modal" class="close-modal">
             <div class="lr">
@@ -28,6 +32,5 @@
     </div>
 </div>
 
-{% load static %}
 <link rel="stylesheet" href="{% static "fm/css/modal.css" %}" />
 <script type="text/javascript" src="{% static "fm/js/fm.js" %}"></script>

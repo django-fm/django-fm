@@ -43,3 +43,23 @@
     width: 1px;
     z-index: 1052;
 }
+
+.fm-modal .modal-loader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.6;
+    filter: alpha(opacity=80);
+    z-index: 1053;
+}
+.fm-modal .modal-loader-img {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -32px 0 0 -32px;
+}
