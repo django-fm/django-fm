@@ -33,6 +33,10 @@
     height: 75px;
     margin-left: 35px;
     transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
     width: 1px;
     z-index: 1051;
 }
@@ -40,6 +44,10 @@
     background-color: #222;
     height: 75px;
     transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
     width: 1px;
     z-index: 1052;
 }
