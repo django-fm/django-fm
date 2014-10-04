@@ -69,7 +69,7 @@ class FeedbackCreateView(AjaxCreateView):
     form_class = FeedbackForm
 ```
 
-That's all in simple case - you are just inherit from `AjaxCreateView` and provide `form_class` argument - you do this every day in Django, right?
+You are just inherit from `AjaxCreateView` and provide `form_class` argument - you do this every day in Django when inherit from `django.views.generic.CreateView`, right?
 
 Also you should create url for this resource in `urls.py`:
 
