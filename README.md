@@ -87,7 +87,7 @@ urlpatterns = patterns(
 
 Again - nothing new here.
 
-The most interesting part in  template - you don't have to define template for your form - just write a ling to creating new object with special attributes which tell django-fm how to behave.
+The most interesting part in  template - you don't have to define template for your form - just write a link to create new object with special attributes which tell django-fm how to behave.
 
 So in your template write:
 
@@ -103,4 +103,4 @@ Every link can have some attributes which define modal window behaviour and call
 * `data-fm-action` - what to do after successfull modal submission - at moment the following values allowed: `reload`, `redirect`, `replace`, `remove`, `prepend`, `append`
 * `data-fm-target` - value of action specific for each action type - for example this must be an URL when `data-fm-action` is `redirect`
 
-See demo project to see this concept in action
+See demo project to see this concept in action.
