@@ -57,7 +57,45 @@ There are 3 class-based views in django-fm to inherit from when you want AJAX fo
 * AjaxUpdateView
 * AjaxDeleteView
 
-You create urls for them as always, in templates you just create links to create, update, delete resources with special class (`fm-create`, `fm-update`, `fm-delete`).
+You create urls for them as usual, in templates you just create links to create, update, delete resources with special class (`fm-create`, `fm-update`, `fm-delete`).
+
+So let's create a view to create new instance of some model. In `views.py`:
+
+```python
+from fm.views import AjaxCreateView
+from feedback.forms import FeedbackForm
+
+class FeedbackCreateView(AjaxCreateView):
+    form_class = FeedbackForm
+```
+
+That's all in simple case - you are just inherit from `AjaxCreateView` and provide `form_class` argument - you do this every day in Django, right?
+
+Also you should create url for this resource in `urls.py`:
+
+```python
+from django.conf.urls import patterns, url
+from feedback.views import FeedbackCreateView
+
+urlpatterns = patterns(
+    'feedback.views',
+    ...
+    url(r'^create/$', FeedbackCreateView.as_view(), name="feedback_create"),
+    ...
+)
+```
+
+Again - nothing new here.
+
+The most interesting part in  template - you don't have to define template for your form - just write a ling to creating new object with special attributes which tell django-fm how to behave.
+
+So in your template write:
+
+```html
+<a href="{% url 'feedback_create' %}" class="fm-create" data-fm-head="Create" data-fm-callback="reload">Create new</a>
+```
+
+Look at `fm-create` special class - it's necessary. And that's all - now when user click on this link - modal AJAX window with form will be shown.
 
 Every link can have some attributes which define modal window behaviour and callback after successfull object creation, update or deletion:
 
