@@ -3,9 +3,9 @@
 Django FM
 =========
 
-Requires jQuery and Bootstrap 3 on client side. Depends on [django-crispy-forms](https://github.com/maraujop/django-crispy-forms/) on server side (and Django of course).
+Requires jQuery and Bootstrap 3 on client side. Depends on [django-crispy-forms](https://github.com/maraujop/django-crispy-forms/) on server side.
 
-This app allows to make responsive AJAX modal forms for creating, editing, deleting objects in Django. This is a very personalized approach to quickly build admin-like interfaces. It reduces an amount of time and code when making tedious Django work. 
+This app allows to make responsive AJAX modal forms for creating, editing, deleting objects in Django. This is a very personalized approach to quickly build admin-like interfaces. It reduces an amount of time and code when making tedious Django work.
 
 Install:
 
