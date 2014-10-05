@@ -95,12 +95,23 @@ So in your template write:
 <a href="{% url 'feedback_create' %}" class="fm-create" data-fm-head="Create" data-fm-callback="reload">Create new</a>
 ```
 
-Look at `fm-create` special class - it's necessary. And that's all - now when user click on this link - modal AJAX window with form will be shown.
+Look at `fm-create` special class - it's necessary. And that's all - now when user clicks on this link - modal AJAX window with form will be shown.
 
 Every link can have some attributes which define modal window behaviour and callback after successfull object creation, update or deletion:
 
 * `data-fm-head` - header of modal
 * `data-fm-action` - what to do after successfull modal submission - at moment the following values allowed: `reload`, `redirect`, `replace`, `remove`, `prepend`, `append`
 * `data-fm-target` - value of action specific for each action type - for example this must be an URL when `data-fm-action` is `redirect`
+
+Let's take a closer look at all these available actions:
+
+* when `data-fm-action` omitted - nothing happens - modal window just closes after successfull submission
+* `reload` - page will be reloaded
+* `redirect` - page will be redirected to URL from `data-fm-target`
+* `replace` - content from element defined via jQuery selector in `data-fm-target` will be replaced with `message` from incoming JSON from server
+* `remove` - element defined via jQuery selector in `data-fm-targer` will be removed from DOM
+* `prepend` - `message` from JSON coming from server will be prepended to element defined in `data-fm-target`
+* `append` - `message` from JSON coming from server will be appended to element defined in `data-fm-target`
+* also there is a possibility to set custom callback how to react after successfull submission.
 
 See demo project to see this concept in action.
