@@ -132,6 +132,7 @@
                 modal_wrapper.show();
                 modal_buttons.find('[type="submit"]').unbind('click').bind("click", function () {
                     var url = options.url;
+                    disable_modal_buttons();
                     $.ajax({
                         url: url,
                         type: 'DELETE',
@@ -176,6 +177,7 @@
                 $.ajax(params).success(function (data) {
                     process_response_data(data, options);
                 }).error(function () {
+                    enable_modal_buttons();
                     modal_body.text(global_options.modal_load_error);
                 });
                 return false;
@@ -207,10 +209,10 @@
                         debug("unknown action " + data.action);
                     }
                 } else {
-                    enable_modal_buttons();
                     modal_body.html(data.message);
                     modal.trigger('modal_body_ready');
                 }
+                enable_modal_buttons();
             }
 
             function hide_modal_wrapper() {
@@ -222,11 +224,11 @@
             }
 
             function disable_modal_buttons() {
-                modal_buttons.find('modal-button').attr('disabled', true);
+                modal_buttons.find('[type="submit"]').attr('disabled', true);
             }
 
             function enable_modal_buttons() {
-                modal_buttons.find('modal-button').attr('disabled', false);
+                modal_buttons.find('[type="submit"]').attr('disabled', false);
             }
 
             function init() {
