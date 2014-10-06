@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.template import RequestContext
 from django.core.serializers.json import DjangoJSONEncoder
-
+from django.conf import settings
 
 try:
     import json
@@ -112,7 +112,7 @@ class AjaxFormMixin(JSONResponseMixin):
         return {'status': 'error', 'message': html}
 
 
-DEFAULT_FORM_TEMPLATE = "fm/form.html"
+DEFAULT_FORM_TEMPLATE = getattr(settings, "FM_DEFAULT_FORM_TEMPLATE", "fm/form.html")
 
 
 class AjaxCreateView(AjaxFormMixin, CreateView):
