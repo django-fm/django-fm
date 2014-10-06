@@ -3,9 +3,9 @@
 Django FM
 =========
 
-Requires jQuery and Bootstrap 3 on client side. Depends on Django-crispy-forms.
+Requires jQuery and Bootstrap 3 on client side. Depends on [django-crispy-forms](https://github.com/maraujop/django-crispy-forms/) on server side.
 
-This app allows to make responsive AJAX modal forms for creating, editing, deleting objects in Django. This is a very personalized approach to quickly build admin-like interfaces. It reduces an amount of time and code when making tedious Django work. 
+This app allows to make responsive AJAX modal forms for creating, editing, deleting objects in Django. This is a very personalized approach to quickly build admin-like interfaces. It reduces an amount of time and code when making tedious Django work.
 
 Install:
 
@@ -57,7 +57,45 @@ There are 3 class-based views in django-fm to inherit from when you want AJAX fo
 * AjaxUpdateView
 * AjaxDeleteView
 
-You create urls for them as always, in templates you just create links to create, update, delete resources with special class (`fm-create`, `fm-update`, `fm-delete`).
+You create urls for them as usual, in templates you just create links to create, update, delete resources with special class (`fm-create`, `fm-update`, `fm-delete`).
+
+So let's create a view to create new instance of some model. In `views.py`:
+
+```python
+from fm.views import AjaxCreateView
+from feedback.forms import FeedbackForm
+
+class FeedbackCreateView(AjaxCreateView):
+    form_class = FeedbackForm
+```
+
+You are just inherit from `AjaxCreateView` and provide `form_class` argument - you do this every day in Django when inherit from `django.views.generic.CreateView`, right?
+
+Also you should create url for this resource in `urls.py`:
+
+```python
+from django.conf.urls import patterns, url
+from feedback.views import FeedbackCreateView
+
+urlpatterns = patterns(
+    'feedback.views',
+    ...
+    url(r'^create/$', FeedbackCreateView.as_view(), name="feedback_create"),
+    ...
+)
+```
+
+Again - nothing new here.
+
+The most interesting part in  template - you don't have to define template for your form - just write a link to create new object with special attributes which tell django-fm how to behave.
+
+So in your template write:
+
+```html
+<a href="{% url 'feedback_create' %}" class="fm-create" data-fm-head="Create" data-fm-callback="reload">Create new</a>
+```
+
+Look at `fm-create` special class - it's necessary. And that's all - now when user clicks on this link - modal AJAX window with form will be shown.
 
 Every link can have some attributes which define modal window behaviour and callback after successfull object creation, update or deletion:
 
@@ -65,4 +103,15 @@ Every link can have some attributes which define modal window behaviour and call
 * `data-fm-action` - what to do after successfull modal submission - at moment the following values allowed: `reload`, `redirect`, `replace`, `remove`, `prepend`, `append`
 * `data-fm-target` - value of action specific for each action type - for example this must be an URL when `data-fm-action` is `redirect`
 
-See demo project to see this concept in action
+Let's take a closer look at all these available actions:
+
+* when `data-fm-action` omitted - nothing happens - modal window just closes after successfull submission
+* `reload` - page will be reloaded
+* `redirect` - page will be redirected to URL from `data-fm-target`
+* `replace` - content from element defined via jQuery selector in `data-fm-target` will be replaced with `message` from incoming JSON from server
+* `remove` - element defined via jQuery selector in `data-fm-targer` will be removed from DOM
+* `prepend` - `message` from JSON coming from server will be prepended to element defined in `data-fm-target`
+* `append` - `message` from JSON coming from server will be appended to element defined in `data-fm-target`
+* also there is a possibility to set custom callback how to react after successfull submission.
+
+See demo project to see this concept in action.
