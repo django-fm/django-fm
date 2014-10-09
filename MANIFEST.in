@@ -1,4 +1,5 @@
-recursive-include fm/static
-recursive-include fm/templates
+include setup.py MANIFEST.in
+recursive-include fm/static *
+recursive-include fm/templates *
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
