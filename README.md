@@ -115,3 +115,9 @@ Let's take a closer look at all these available actions:
 * also there is a possibility to set custom callback how to react after successfull submission.
 
 See demo project to see this concept in action.
+
+There are some other things you need to be aware of:
+
+* when modal form with form ready - an event 'fm.ready' is triggered on `body` element (by default). This can help you to add some javascript widgets into your form.
+* note that file upload via AJAX will work in modern browsers only - see [this](http://caniuse.com/#feat=xhr2) table.
+* you can extend `AjaxCreateView`, `AjaxUpdateView` and `AjaxDeleteView` using standard Django techniques. For example, you can add permission checking using `PermissionMixin` from [django-braces](https://github.com/brack3t/django-braces) project
