@@ -59,6 +59,9 @@ There are 3 class-based views in django-fm to inherit from when you want AJAX fo
 
 You create urls for them as usual, in templates you just create links to create, update, delete resources with special class (`fm-create`, `fm-update`, `fm-delete`).
 
+Get started
+-----------
+
 So let's create a view to create new instance of some model. In `views.py`:
 
 ```python
@@ -116,7 +119,8 @@ Let's take a closer look at all these available actions:
 
 See demo project to see this concept in action.
 
-There are some other things you need to be aware of:
+Some other things to be aware of
+--------------------------------
 
 * note that file upload via AJAX will work in modern browsers only - see [this](http://caniuse.com/#feat=xhr2) table.
 * when modal with form ready - an event `fm.ready` will be triggered on `body` element (by default). This can help to add some javascript widgets into form.
