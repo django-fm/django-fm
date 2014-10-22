@@ -116,6 +116,10 @@
                 debug("options:");
                 debug(options);
                 modal.modal('show');
+                modal_buttons.find('[type="submit"]').unbind('click').bind("click", function () {
+                    var form = modal.find('form');
+                    submit_form(form, options);
+                });
                 load_content(options);
             }
 
