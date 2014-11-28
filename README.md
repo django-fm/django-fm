@@ -103,12 +103,12 @@ Look at `fm-create` special class - it's necessary. And that's all - now when us
 Every link can have some attributes which define modal window behaviour and callback after successfull object creation, update or deletion:
 
 * `data-fm-head` - header of modal
-* `data-fm-action` - what to do after successfull modal submission - at moment the following values allowed: `reload`, `redirect`, `replace`, `remove`, `prepend`, `append`
-* `data-fm-target` - value of action specific for each action type - for example this must be an URL when `data-fm-action` is `redirect`
+* `data-fm-callback` - what to do after successfull modal submission - at moment the following values allowed: `reload`, `redirect`, `replace`, `remove`, `prepend`, `append`
+* `data-fm-target` - value of action specific for each action type - for example this must be an URL when `data-fm-callback` is `redirect`
 
 Let's take a closer look at all these available actions:
 
-* when `data-fm-action` omitted - nothing happens - modal window just closes after successfull submission
+* when `data-fm-callback` omitted - nothing happens - modal window just closes after successfull submission
 * `reload` - page will be reloaded
 * `redirect` - page will be redirected to URL from `data-fm-target`
 * `replace` - content from element defined via jQuery selector in `data-fm-target` will be replaced with `message` from incoming JSON from server
