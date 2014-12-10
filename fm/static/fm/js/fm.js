@@ -220,9 +220,6 @@
                     });
                     // and set event ready:
                     modal.trigger(global_options.ready_event_name);
-
-                    // Not implemented?
-                    modal.trigger('modal_body_ready');
                 }
                 enable_modal_buttons();
             }
@@ -274,3 +271,4 @@
         }
     });
 })(jQuery);
+
