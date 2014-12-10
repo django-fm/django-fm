@@ -210,6 +210,18 @@
                     }
                 } else {
                     modal_body.html(data.message);
+                    // Also reinstate bindings on submit buttons (in case a
+                    // form is invalid, subsequent invalid submissions should
+                    // keep the user on the form):
+                    var form = modal.find('form');
+                    form.on('submit', function () {
+                            submit_form(form, options);
+                            return false;
+                    });
+                    // and set event ready:
+                    modal.trigger(global_options.ready_event_name);
+
+                    // Not implemented?
                     modal.trigger('modal_body_ready');
                 }
                 enable_modal_buttons();
