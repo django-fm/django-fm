@@ -103,7 +103,7 @@ Look at `fm-create` special class - it's necessary. And that's all - now when us
 Every link can have some attributes which define modal window behaviour and callback after successfull object creation, update or deletion:
 
 * `data-fm-head` - header of modal
-* `data-fm-callback` - what to do after successfull modal submission - at moment the following values allowed: `reload`, `redirect`, `replace`, `remove`, `prepend`, `append`
+* `data-fm-callback` - what to do after successfull modal submission - at moment the following values allowed: `reload`, `redirect`, `replace`, `remove`, `prepend`, `append`, `redirect_from_response`
 * `data-fm-target` - value of action specific for each action type - for example this must be an URL when `data-fm-callback` is `redirect`
 
 Let's take a closer look at all these available actions:
@@ -115,6 +115,7 @@ Let's take a closer look at all these available actions:
 * `remove` - element defined via jQuery selector in `data-fm-targer` will be removed from DOM
 * `prepend` - `message` from JSON coming from server will be prepended to element defined in `data-fm-target`
 * `append` - `message` from JSON coming from server will be appended to element defined in `data-fm-target`
+* `redirect_from_response` - the current window will be redirected to the `message` from JSON coming from server. Your view must override the `get_response_message` method to return the URL to redirect to. 
 * also there is a possibility to set custom callback how to react after successfull submission.
 
 See demo project to see this concept in action.
