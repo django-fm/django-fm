@@ -200,6 +200,8 @@
                         $(options.modal_target).prepend(data.message);
                     } else if (options.modal_callback === 'replace') {
                         $(options.modal_target).replaceWith(data.message);
+                    } else if (options.modal_callback === 'redirect_from_response') {
+                        window.location = data.message;
                     } else if (options.modal_callback === 'trigger') {
                         delegate_target.trigger(global_options.trigger_event_name, {
                             data: data,
