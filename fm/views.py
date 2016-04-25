@@ -1,5 +1,5 @@
 # coding: utf-8
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, FormView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.template import RequestContext
@@ -151,3 +151,13 @@ class AjaxDeleteView(JSONResponseMixin, DeleteView):
 
         success_url = self.get_success_url()
         return HttpResponseRedirect(success_url)
+
+
+class AjaxFormView(AjaxFormMixin, FormView):
+
+    template_name = DEFAULT_FORM_TEMPLATE
+
+    def form_valid(self, form):
+        if self.request.is_ajax():
+            return self.render_json_response(self.get_success_result())
+        return HttpResponseRedirect(self.get_success_url())
