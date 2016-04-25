@@ -157,7 +157,7 @@ class AjaxFormView(AjaxFormMixin, FormView):
 
     template_name = DEFAULT_FORM_TEMPLATE
 
-    def form_valid(self):
+    def form_valid(self, form):
         if self.request.is_ajax():
             return self.render_json_response(self.get_success_result())
         return HttpResponseRedirect(self.get_success_url())
