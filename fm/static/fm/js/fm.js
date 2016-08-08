@@ -16,10 +16,54 @@
                 modal_load_error: "Error occurred while loading",
                 delegate_target: 'body',
                 trigger_event_name: 'fm.success',
-                ready_event_name: 'fm.ready'
+                ready_event_name: 'fm.ready',
+                custom_callbacks : {}
             };
 
             var global_options = jQuery.extend(defaults, custom_options);
+
+            var delegate_target = $(global_options.delegate_target);
+            var modal = $(global_options.modal_selector);
+            var modal_loader = $(global_options.modal_loader_selector);
+            var modal_wrapper = $(global_options.modal_wrapper_selector);
+            var modal_head = $(global_options.modal_head_selector);
+            var modal_body = $(global_options.modal_body_selector);
+            var modal_buttons = $(global_options.modal_buttons_selector);
+
+            var default_callbacks = {
+                "reload": function() {
+                    window.location.reload();
+                },
+                "redirect": function(data, options) {
+                    window.location = options.modal_target;
+                },
+                "remove": function(data, options) {
+                    $(options.modal_target).remove();
+                },
+                "delete": function(data, options) {
+                    $(options.modal_target).remove();
+                },
+                "append": function(data, options) {
+                    $(options.modal_target).append(data.message);
+                },
+                "prepend": function(data, options) {
+                    $(options.modal_target).prepend(data.message);
+                },
+                "replace": function(data, options) {
+                    $(options.modal_target).replaceWith(data.message);
+                },
+                "redirect_from_response": function(data) {
+                    window.location = data.message;
+                },
+                "trigger": function(data, options) {
+                    delegate_target.trigger(global_options.trigger_event_name, {
+                        data: data,
+                        options: options
+                    });
+                }
+            };
+
+            var global_callbacks = jQuery.extend(default_callbacks, global_options.custom_callbacks);
 
             // using jQuery
             function getCookie(name) {
@@ -58,14 +102,6 @@
                     jqXHR.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
                 }
             });
-
-            var delegate_target = $(global_options.delegate_target);
-            var modal = $(global_options.modal_selector);
-            var modal_loader = $(global_options.modal_loader_selector);
-            var modal_wrapper = $(global_options.modal_wrapper_selector);
-            var modal_head = $(global_options.modal_head_selector);
-            var modal_body = $(global_options.modal_body_selector);
-            var modal_buttons = $(global_options.modal_buttons_selector);
 
             function debug(data) {
                 if (global_options.debug === true) {
@@ -186,27 +222,12 @@
             function process_response_data(data, options) {
                 if (data.status === 'ok') {
                     modal.modal("hide");
+                    var callback = options.modal_callback;
                     if (options.modal_callback === null || options.modal_callback === undefined) {
                         $.noop();
-                    } else if (options.modal_callback === 'reload') {
-                        window.location.reload();
-                    } else if (options.modal_callback === 'redirect') {
-                        window.location = options.modal_target;
-                    } else if (options.modal_callback === 'remove' || options.modal_callback === 'delete') {
-                        $(options.modal_target).remove();
-                    } else if (options.modal_callback === 'append') {
-                        $(options.modal_target).append(data.message);
-                    } else if (options.modal_callback === 'prepend') {
-                        $(options.modal_target).prepend(data.message);
-                    } else if (options.modal_callback === 'replace') {
-                        $(options.modal_target).replaceWith(data.message);
-                    } else if (options.modal_callback === 'redirect_from_response') {
-                        window.location = data.message;
-                    } else if (options.modal_callback === 'trigger') {
-                        delegate_target.trigger(global_options.trigger_event_name, {
-                            data: data,
-                            options: options
-                        });
+                    } else if (callback in global_callbacks) {
+                        var cb = global_callbacks[callback];
+                        cb(data, options);
                     } else {
                         debug("unknown action " + data.action);
                     }
