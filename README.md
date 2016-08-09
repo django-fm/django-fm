@@ -116,9 +116,29 @@ Let's take a closer look at all these available actions:
 * `prepend` - `message` from JSON coming from server will be prepended to element defined in `data-fm-target`
 * `append` - `message` from JSON coming from server will be appended to element defined in `data-fm-target`
 * `redirect_from_response` - the current window will be redirected to the `message` from JSON coming from server. Your view must override the `get_response_message` method to return the URL to redirect to. 
-* also there is a possibility to set custom callback how to react after successfull submission.
+* also there is a possibility to set custom callback how to react on successfull submission.
 
 See demo project to see this concept in action.
+
+Custom callbacks
+----------------
+
+Since version 0.2.4 it's possible to register custom callback functions to do non-standard or more
+complicated logic after success form submission. Here is how you can register new callback:
+
+```
+$(function() {
+    $.fm({
+        debug: true,
+        custom_callbacks: {
+            "appendWithAlert": function(data, options) {
+                $(options.modal_target).append(data.message);
+                alert("model instance created!");
+            }
+        }
+    });
+});
+```
 
 Some other things to be aware of
 --------------------------------

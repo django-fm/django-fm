@@ -1,15 +1,12 @@
 # coding: utf-8
+import json
+
 from django.views.generic import CreateView, UpdateView, DeleteView, FormView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.template import RequestContext
 from django.core.serializers.json import DjangoJSONEncoder
 from django.conf import settings
-
-try:
-    import json
-except ImportError:
-    from django.utils import simplejson as json
 
 
 class JSONResponseMixin(object):
