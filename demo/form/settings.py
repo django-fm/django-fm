@@ -27,8 +27,6 @@ SECRET_KEY = 'x4bt_1$255!2awlnrn8z&j$k!62zfzo%52%7a_((ctu$$qwfdo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if not is_heroku else False
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -92,9 +90,23 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, "templates"),
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, "templates"),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        }
+    },
+]
 
 if is_heroku:
     # Parse database configuration from $DATABASE_URL
