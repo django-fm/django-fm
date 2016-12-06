@@ -118,7 +118,7 @@
                 $.ajax({
                     url: options.url,
                     type: "GET",
-                    dataType: "html",
+                    dataType: "text",
                     error: function () {
                         debug("error occurred while loading modal body from URL");
                         modal_body.text(global_options.modal_load_error);
