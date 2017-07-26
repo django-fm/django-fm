@@ -124,7 +124,7 @@ Custom callbacks
 ----------------
 
 Since version 0.2.4 it's possible to register custom callback functions to do non-standard or more
-complicated logic after success form submission. Here is how you can register new callback:
+complicated logic after success form submission. Here is how you can register new callback (should be used with `data-fm-callback="appendWithAlert"` parameter):
 
 ```
 $(function() {
