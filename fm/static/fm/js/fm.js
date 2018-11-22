@@ -159,6 +159,19 @@
                 load_content(options);
             }
 
+
+            function open_modal(options) {
+                debug("showing modal");
+                debug("options:");
+                debug(options);
+                modal.modal('show');
+                modal_buttons.find('[type="submit"]').unbind('click').bind("click", function () {
+                    var form = modal.find('form');
+                    submit_form(form, options);
+                });
+                load_content(options);
+            }
+
             function show_delete_modal(element) {
                 debug("showing delete modal");
                 var options = extract_modal_options(element, 'delete');
@@ -287,9 +300,13 @@
                     show_delete_modal(self);
                     return false;
                 });
+
             }
 
-            return init();
+            return {
+                init: init,
+                open_modal: open_modal
+            }
 
         }
     });
