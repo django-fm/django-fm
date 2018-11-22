@@ -103,6 +103,8 @@ Look at `fm-create` special class - it's necessary. And that's all - now when us
 Every link can have some attributes which define modal window behaviour and callback after successfull object creation, update or deletion:
 
 * `data-fm-head` - header of modal
+* `data-fm-ok` - OK button label override
+* `data-fm-cancel` - Cancel button label override
 * `data-fm-callback` - what to do after successfull modal submission - at moment the following values allowed: `reload`, `redirect`, `replace`, `remove`, `prepend`, `append`, `redirect_from_response`
 * `data-fm-target` - value of action specific for each action type - for example this must be an URL when `data-fm-callback` is `redirect`
 

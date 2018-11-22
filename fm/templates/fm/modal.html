@@ -20,11 +20,10 @@
                         <div class="modal-body"></div>
                         <div class="modal-buttons">
                             {% block modal_buttons %}
-                            <button class="btn btn-primary" type="submit">
-                                {% trans 'OK' %}
+                            <button class="btn btn-primary modal-ok" type="submit" data-fm-default-ok="{% trans 'OK' %}">
                             </button>
                             <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-times"></i>
-                                {% trans 'Cancel' %}
+                                <span class="modal-cancel" data-fm-default-cancel="{% trans 'Cancel' %}"></span>
                             </button>
                             {% endblock %}
                         </div>

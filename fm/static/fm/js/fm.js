@@ -10,6 +10,8 @@
                 modal_selector: '#fm-modal',
                 modal_wrapper_selector: '.modal-wrapper',
                 modal_head_selector: '.modal-head',
+                modal_ok_selector: '.modal-ok',
+                modal_cancel_selector: '.modal-cancel',
                 modal_body_selector: '.modal-body',
                 modal_buttons_selector: '.modal-buttons',
                 modal_loader_selector: '.modal-loader',
@@ -27,6 +29,8 @@
             var modal_loader = $(global_options.modal_loader_selector);
             var modal_wrapper = $(global_options.modal_wrapper_selector);
             var modal_head = $(global_options.modal_head_selector);
+            var modal_ok = $(global_options.modal_ok_selector);
+            var modal_cancel = $(global_options.modal_cancel_selector);
             var modal_body = $(global_options.modal_body_selector);
             var modal_buttons = $(global_options.modal_buttons_selector);
 
@@ -136,6 +140,8 @@
                     }
                 }).done(function(){
                     modal_head.html(options.modal_head);
+                    modal_ok.html(options.modal_ok || options.default_modal_ok);
+                    modal_cancel.html(options.modal_cancel || options.default_modal_cancel);
                     modal_loader.hide();
                 });
             }
@@ -143,6 +149,8 @@
             function clear_modal() {
                 hide_modal_wrapper();
                 modal_head.html('');
+                modal_ok.html('');
+                modal_cancel.html('');
                 modal_body.html('');
             }
 
@@ -165,6 +173,8 @@
                 debug(options);
                 modal.modal('show');
                 modal_head.html(options.modal_head);
+                modal_ok.html(options.modal_ok || options.default_modal_ok);
+                modal_cancel.html(options.modal_cancel || options.default_modal_cancel);
                 modal_wrapper.show();
                 modal_buttons.find('[type="submit"]').unbind('click').bind("click", function () {
                     var url = options.url;
@@ -186,6 +196,10 @@
                     url: element.attr('href'),
                     action: action,
                     modal_head: element.attr('data-fm-head'),
+                    modal_ok: element.attr('data-fm-ok'),
+                    default_modal_ok: $('.modal-ok').attr('data-fm-default-ok'),
+                    modal_cancel: element.attr('data-fm-cancel'),
+                    default_modal_cancel: $('.modal-cancel').attr('data-fm-default-cancel'),
                     modal_callback: element.attr('data-fm-callback'),
                     modal_target: element.attr('data-fm-target')
                 };
