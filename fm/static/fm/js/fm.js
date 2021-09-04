@@ -119,24 +119,21 @@
                     url: options.url,
                     type: "GET",
                     dataType: "html",
-                    error: function () {
-                        debug("error occurred while loading modal body from URL");
-                        modal_body.text(global_options.modal_load_error);
-                    },
-                    success: function (data) {
-                        debug("modal body successfully loaded");
-                        modal_body.html(data);
-                        show_modal_wrapper();
-                        var form = modal.find('form');
-                        form.on('submit', function () {
-                            submit_form(form, options);
-                            return false;
-                        });
-                        modal.trigger(global_options.ready_event_name);
-                    }
-                }).done(function(){
+                }).done(function(data) {
+                    debug("modal body successfully loaded");
+                    modal_body.html(data);
+                    show_modal_wrapper();
+                    var form = modal.find('form');
+                    form.on('submit', function () {
+                        submit_form(form, options);
+                        return false;
+                    });
+                    modal.trigger(global_options.ready_event_name);
                     modal_head.html(options.modal_head);
                     modal_loader.hide();
+                }).fail(function() {
+                    debug("error occurred while loading modal body from URL");
+                    modal_body.text(global_options.modal_load_error);
                 });
             }
 
@@ -173,10 +170,9 @@
                         url: url,
                         type: 'DELETE',
                         dataType: "json",
-                        success: function(data) {
-                            debug(data);
-                            process_response_data(data, options);
-                        }
+                    }).done(function(data) {
+                        debug(data);
+                        process_response_data(data, options);
                     });
                 });
             }
@@ -210,9 +206,9 @@
                 }
                 params['data'] = data;
                 disable_modal_buttons();
-                $.ajax(params).success(function (data) {
+                $.ajax(params).done(function (data) {
                     process_response_data(data, options);
-                }).error(function () {
+                }).fail(function () {
                     enable_modal_buttons();
                     modal_body.text(global_options.modal_load_error);
                 });
